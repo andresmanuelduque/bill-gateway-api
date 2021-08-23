@@ -6,8 +6,13 @@ namespace App\Helper;
 
 class HttpHelper
 {
-    public static function sendRequest($url, $data, $type, $header = null)
+    public static function sendRequest($request,$baseUrl)
     {
+        $data = $request->request->all();
+        $method= $request->getMethod();
+        $path = $request->getRequestUri();
+        $url = $baseUrl.$path;
+
         $headers = [
             "cache-control: no-cache",
             "accept: application/json",
@@ -15,12 +20,8 @@ class HttpHelper
         ];
 
         try {
-            if ($header) {
-                if (is_array($header)) {
-                    $headers = array_merge($headers, $header);
-                } else {
-                    $headers[] = $header;
-                }
+            if (!is_null($request->headers->get("authorization"))) {
+                $headers[] = "authorization: ".$request->headers->get("authorization");
             }
 
             $jsonData = json_encode($data);
@@ -33,11 +34,12 @@ class HttpHelper
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 600,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => $type,
+                CURLOPT_CUSTOMREQUEST => $method,
                 CURLOPT_POSTFIELDS => "{$jsonData}",
                 CURLOPT_HTTPHEADER => $headers
             ));
             $resp = curl_exec($curl);
+
             if ($resp === false) {
                 return array('curl_error' => curl_error($curl), 'curerrno' => curl_errno($curl));
             }

@@ -8,3 +8,8 @@ services:
       - 8180:8180
     volumes:
       - .:/app
+    networks:
+      - bill-network
+networks:
+  bill-network:
+    external: true
