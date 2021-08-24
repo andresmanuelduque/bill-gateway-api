@@ -7,4 +7,4 @@ COPY . /app
 RUN composer install
 
 CMD php -S 0.0.0.0:8180 -t public
-EXPOSE 8181
+EXPOSE 8180
