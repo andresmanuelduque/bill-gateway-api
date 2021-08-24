@@ -16,13 +16,13 @@
 $router->post('/user/login', 'UserController@routeUserService');
 $router->post('/user/register', 'UserController@routeUserService');
 $router->get('/bill/token/{token}','BillController@routeBillService');
-$router->post('/bill/pay','BillController@payBill');
+$router->post('/bill/pay','BillController@routeBillService');
 
 $router->group(['middleware' => 'jwt'], function () use ($router) {
 
     $router->post('/bill/create', 'BillController@routeBillService');
     $router->post('/bill/list', 'BillController@routeBillService');
     $router->get('/bill/list/frequency/{frequency}', 'BillController@routeBillService');
-    $router->get('/user/balance', 'UserController@routeBillService');
+    $router->get('/user/balance', 'BillController@routeBillService');
 
 });
