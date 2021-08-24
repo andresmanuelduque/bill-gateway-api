@@ -1,24 +1,49 @@
-# Lumen PHP Framework
+# API para la administración de facturas
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+Este proyecto contiene elservicio API GATEWAY para la adminsitracion y pago de facturas
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Comenzando 
 
-## Official Documentation
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
 
-## Contributing
+### Pre-requisitos 📋
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+Para configurar el proyecto necesitas:
 
-## Security Vulnerabilities
+Docker
+```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### Instalación 🔧
+Ir a la raiz del proyecto
 
-## License
+* Configurar las variables de entorno
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+IVA_PERCENT = Porcentaje de iva para el calculo de impuestos)
+PAY_PAGE_URL = Url de la ubicacion de la aplicación Administrador de Facturas (dte-frontend)
+APP_KEY= Key de la app (debe coincidir con el key del proyecto bill-manage-api)
+JWT_KEY= Key del JWT (debe coincidir con el key del proyecto bill-manage-api)
+USER_SERVICE_BASE_URL= Ruta del microservicio de usuarios
+BILL_SERVICE_BASE_URL= Ruta del microservicio de facturas
+```
+
+* Asegurarnos que existe la red "bill-network" si no existe correr el siguiente comando
+```
+> docker network create bill-network
+```
+
+* Ejecutar el siguiente comando para levantar el contenedor de lumen
+```
+>docker-compose up
+```
+
+## Construido con 🛠️
+
+* [Lumen](https://lumen.laravel.com/docs/8.x) - El framework web usado
+* [Composer](https://getcomposer.org/doc/) - Manejador de dependencias
+
+## Autor ✒️
+
+* **Andrés Duque** - [andres-duque](https://github.com/andresmanuelduque)
